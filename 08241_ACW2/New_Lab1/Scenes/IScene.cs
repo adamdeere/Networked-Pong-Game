@@ -2,9 +2,10 @@
 
 namespace PongGame
 {
-    interface IScene
+    internal interface IScene
     {
         void Render(FrameEventArgs e);
+
         void Update(FrameEventArgs e);
     }
 }

@@ -3,28 +3,25 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using PongGame.GameObjects;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PongGame.Scenes
 {
-    class SlaveGameClass : Scene, IScene
+    internal class SlaveGameClass : Scene, IScene
     {
-        Matrix4 projectionMatrix;
+        private Matrix4 projectionMatrix;
 
-        PlayerPaddle playerPaddle;
-        PlayerTwoPaddle playerTwoPaddle;
-        Ball ball;
-        int scorePlayer = 0;
-        int scorePlayerTwo = 0;
-        double gameTime = 30;
-        static string serverIp;
-       static string masterIP;
-        static int portNumber;
-       Client client = new Client(serverIp, portNumber, masterIP);
+        private PlayerPaddle playerPaddle;
+        private PlayerTwoPaddle playerTwoPaddle;
+        private Ball ball;
+        private int scorePlayer = 0;
+        private int scorePlayerTwo = 0;
+        private double gameTime = 30;
+        private static string serverIp;
+        private static string masterIP;
+        private static int portNumber;
+        private Client client = new Client(serverIp, portNumber, masterIP);
+
         public SlaveGameClass(SceneManager sceneManager, Client inClient)
             : base(sceneManager)
         {
@@ -40,6 +37,7 @@ namespace PongGame.Scenes
 
             GL.ClearColor(Color.Black);
         }
+
         private void ResetGame()
         {
             playerPaddle = new PlayerPaddle(40, (int)(SceneManager.WindowHeight * 0.5));
@@ -49,27 +47,29 @@ namespace PongGame.Scenes
             ball = new Ball((int)(SceneManager.WindowWidth * 0.5), (int)(SceneManager.WindowHeight * 0.5));
             ball.Init();
         }
+
         public void Keyboard_KeyDown(object sender, KeyboardKeyEventArgs e)
         {
             switch (e.Key)
             {
                 case Key.Up:
-                  //  client.slaveMoveUp(masterIP,portNumber);
+                    //  client.slaveMoveUp(masterIP,portNumber);
                     playerTwoPaddle.Move(20);
                     break;
+
                 case Key.Down:
-                   // client.slaveMoveDown(masterIP, portNumber);
+                    // client.slaveMoveDown(masterIP, portNumber);
                     playerTwoPaddle.Move(-20);
                     break;
-                //case Key.A:
-                //    playerPaddle.Move(20);
-                //    break;
-                //case Key.Z:
-                //    playerPaddle.Move(-20);
-                //    break;
-
+                    //case Key.A:
+                    //    playerPaddle.Move(20);
+                    //    break;
+                    //case Key.Z:
+                    //    playerPaddle.Move(-20);
+                    //    break;
             }
         }
+
         //here
         public void Update(FrameEventArgs e)
         {
@@ -88,14 +88,14 @@ namespace PongGame.Scenes
                 {
                     ResetGame();
                 }
-               // gameTime -= (1.0 * e.Time);
+                // gameTime -= (1.0 * e.Time);
             }
             else
             {
                 sceneManager.GameOver();
             }
-
         }
+
         private bool GoalDetection()
         {
             if (ball.Position.X < 0)
@@ -111,6 +111,7 @@ namespace PongGame.Scenes
 
             return false;
         }
+
         private void CollisionDetection()
         {
             // AI
@@ -128,6 +129,7 @@ namespace PongGame.Scenes
                 ball.Velocity = new Vector2(ball.Velocity.X * -1.0f, ball.Velocity.Y) * 2.0f;
             }
         }
+
         public void Render(FrameEventArgs e)
         {
             GL.Viewport(0, 0, sceneManager.Width, sceneManager.Height);

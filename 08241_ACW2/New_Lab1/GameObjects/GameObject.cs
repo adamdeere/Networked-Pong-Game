@@ -1,10 +1,8 @@
-﻿using System;
-using OpenTK;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK;
 
 namespace PongGame
 {
-    abstract class GameObject
+    internal abstract class GameObject
     {
         protected Vector2 position;
         protected Vector2 velocity;
@@ -21,11 +19,13 @@ namespace PongGame
             set { velocity = value; }
         }
 
-        abstract public void Render(Matrix4 projectionMatrix);
-        abstract public void Update(float dt);
+        public abstract void Render(Matrix4 projectionMatrix);
+
+        public abstract void Update(float dt);
 
         // Graphics
         protected int pgmID;
+
         protected int vsID;
         protected int fsID;
         protected int attribute_vcol;

@@ -1,13 +1,13 @@
-﻿using System;
-using System.IO;
-using OpenTK;
+﻿using OpenTK;
 using OpenTK.Graphics.OpenGL;
+using System;
+using System.IO;
 
 namespace PongGame
 {
-    class Ball : GameObject
+    internal class Ball : GameObject
     {
-        Random rand = new Random();
+        private Random rand = new Random();
 
         public Ball()
         {
@@ -90,13 +90,13 @@ namespace PongGame
             GL.GenBuffers(1, out vbo_position);
             GL.GenBuffers(1, out vbo_color);
 
-            vertdata = new Vector3[] { 
+            vertdata = new Vector3[] {
                 new Vector3(-10f, +10f, 0f),
                 new Vector3(-10f, -10f, 0f),
                 new Vector3(+10f, -10f, 0f),
                 new Vector3(+10f, +10f, 0f) };
 
-            coldata = new Vector3[] { 
+            coldata = new Vector3[] {
                 new Vector3(1f, 1f, 1f),
                 new Vector3(1f, 1f, 1f),
                 new Vector3(1f, 1f, 1f),
@@ -117,7 +117,7 @@ namespace PongGame
             viewMatrix = Matrix4.Identity;
         }
 
-        void LoadShader(String filename, ShaderType type, int program, out int address)
+        private void LoadShader(String filename, ShaderType type, int program, out int address)
         {
             address = GL.CreateShader(type);
             using (StreamReader sr = new StreamReader(filename))

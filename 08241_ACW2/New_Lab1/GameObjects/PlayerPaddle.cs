@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace PongGame
+﻿namespace PongGame
 {
-    class PlayerPaddle : Paddle
+    internal class PlayerPaddle : Paddle
     {
         public PlayerPaddle(int x, int y) : base(x, y)
-        { 
+        {
         }
 
         public override void Update(float dt)

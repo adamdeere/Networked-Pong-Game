@@ -1,11 +1,11 @@
-﻿using System;
-using System.IO;
-using OpenTK;
+﻿using OpenTK;
 using OpenTK.Graphics.OpenGL;
+using System;
+using System.IO;
 
 namespace PongGame
 {
-    abstract class Paddle : GameObject
+    internal abstract class Paddle : GameObject
     {
         public Paddle()
         {
@@ -52,20 +52,20 @@ namespace PongGame
                 Console.WriteLine("Error binding attributes");
             }
 
-            // Store geometry in vertex buffer 
+            // Store geometry in vertex buffer
             GL.GenVertexArrays(1, out vao_Handle);
             GL.BindVertexArray(vao_Handle);
 
             GL.GenBuffers(1, out vbo_position);
             GL.GenBuffers(1, out vbo_color);
 
-            vertdata = new Vector3[] { 
+            vertdata = new Vector3[] {
                 new Vector3(-10f, +30f, 0f),
                 new Vector3(-10f, -30f, 0f),
                 new Vector3(+10f, -30f, 0f),
                 new Vector3(+10f, +30f, 0f) };
 
-            coldata = new Vector3[] { 
+            coldata = new Vector3[] {
                 new Vector3(1f, 1f, 1f),
                 new Vector3(1f, 1f, 1f),
                 new Vector3(1f, 1f, 1f),

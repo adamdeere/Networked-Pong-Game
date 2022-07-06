@@ -1,28 +1,30 @@
-﻿using System;
-using OpenTK;
+﻿using OpenTK;
 using OpenTK.Graphics.OpenGL;
-using OpenTK.Input;
 using PongGame.Scenes;
+using System;
 using System.Collections.Generic;
 
 namespace PongGame
 {
-    class SceneManager : GameWindow
+    internal class SceneManager : GameWindow
     {
-        Scene scene;
-        static int width = 0;
-        static int height = 0;
-       // static double menuTime = 10;
-       
-        Client client;
-        MasterServer master;
+        private Scene scene;
+        private static int width = 0;
+        private static int height = 0;
+        // static double menuTime = 10;
+
+        private Client client;
+        private MasterServer master;
+
         public delegate void SceneDelegate(FrameEventArgs e);
+
         public SceneDelegate renderer;
         public SceneDelegate updater;
         public static Dictionary<int, string> myDictionary = new Dictionary<int, string>();
         public string ServerIp;
         public string masterIp;
         public int Port;
+
         public SceneManager(Client inClient, MasterServer inMaster)
         {
             client = inClient;
@@ -57,6 +59,7 @@ namespace PongGame
             GL.Flush();
             SwapBuffers();
         }
+
         public void StartNewGame()
         {
             scene = new GameScene(this);
@@ -66,23 +69,27 @@ namespace PongGame
         {
             scene = new MainMenuScene(this, client, master);
         }
+
         public void GameOver()
         {
             scene = new GameOverScene(this, client);
-            
         }
+
         public void HighScore(int scorePlayer)
         {
             scene = new HighScoreScene(this, scorePlayer, client);
         }
+
         public void MultiPLayerGame()
         {
             scene = new MultiGameScene(this);
         }
+
         public void HostAgame()
         {
             scene = new MasterGameClass(this, client, master);
         }
+
         public void ConnectToAgame()
         {
             scene = new SlaveGameClass(this, client);
@@ -107,6 +114,4 @@ namespace PongGame
             SceneManager.height = Height;
         }
     }
-
 }
-

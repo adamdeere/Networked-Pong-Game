@@ -5,55 +5,51 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PongGame.Scenes
 {
-    class GameOverScene : Scene, IScene
+    internal class GameOverScene : Scene, IScene
     {
-        HighScoreScene namesAndStuff;
-        Bitmap textBMP;
-        int textTexture;
-        Graphics textGFX;
+        private HighScoreScene namesAndStuff;
+        private Bitmap textBMP;
+        private int textTexture;
+        private Graphics textGFX;
 
-        public static Dictionary<int ,string> ScoresOnTheDoors = new Dictionary<int ,string>();
-        
+        public static Dictionary<int, string> ScoresOnTheDoors = new Dictionary<int, string>();
 
         #region
-        
-        int inScore;
-        int playerOneScore;
-        int playerTwoScore;
-        int playerThreeScore;
-        int playerFourScore;
-        int playerFiveScore;
-       
-        string playerOneName;
-        string playerTwoName;
-        string playerThreeName;
-        string playerFourName;
-        string playerFiveName;
-        Client client;
-       
+
+        private int inScore;
+        private int playerOneScore;
+        private int playerTwoScore;
+        private int playerThreeScore;
+        private int playerFourScore;
+        private int playerFiveScore;
+
+        private string playerOneName;
+        private string playerTwoName;
+        private string playerThreeName;
+        private string playerFourName;
+        private string playerFiveName;
+        private Client client;
+
         #endregion
-        
+
         public GameOverScene(SceneManager sceneManager, Client inClient)
             : base(sceneManager)
         {
             client = inClient;
             namesAndStuff = new HighScoreScene(sceneManager, inScore, client);
-             playerOneScore = namesAndStuff.playerOneScore;
-             playerTwoScore = namesAndStuff.playerTwoScore;
-             playerThreeScore = namesAndStuff.playerThreeScore;
-             playerFourScore = namesAndStuff.playerFourScore;
-             playerFiveScore = namesAndStuff.playerFiveScore;
-             playerOneName = namesAndStuff.playerOneName;
-             playerTwoName = namesAndStuff.playerTwoName;
-             playerThreeName = namesAndStuff.playerThreeName;
-             playerFourName = namesAndStuff.playerFourName;
-             playerFiveName = namesAndStuff.playerFiveName;
+            playerOneScore = namesAndStuff.playerOneScore;
+            playerTwoScore = namesAndStuff.playerTwoScore;
+            playerThreeScore = namesAndStuff.playerThreeScore;
+            playerFourScore = namesAndStuff.playerFourScore;
+            playerFiveScore = namesAndStuff.playerFiveScore;
+            playerOneName = namesAndStuff.playerOneName;
+            playerTwoName = namesAndStuff.playerTwoName;
+            playerThreeName = namesAndStuff.playerThreeName;
+            playerFourName = namesAndStuff.playerFourName;
+            playerFiveName = namesAndStuff.playerFiveName;
 
             // Set the title of the window
             sceneManager.Title = "Pong - high score menu";
@@ -74,10 +70,12 @@ namespace PongGame.Scenes
             GL.BindTexture(TextureTarget.Texture2D, 0);
             GL.Disable(EnableCap.Texture2D);
         }
+
         public void Update(FrameEventArgs e)
         {
             SelectMenu(new KeyboardKeyEventArgs());
         }
+
         public void SelectMenu(KeyboardKeyEventArgs e)
         {
             KeyboardState keyState = Keyboard.GetState();
@@ -95,7 +93,7 @@ namespace PongGame.Scenes
             // Enable the texture
             GL.Enable(EnableCap.Texture2D);
             GL.BindTexture(TextureTarget.Texture2D, textTexture);
-            
+
             BitmapData data = textBMP.LockBits(new Rectangle(0, 0, textBMP.Width, textBMP.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, (int)textBMP.Width, (int)textBMP.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, data.Scan0);
             textBMP.UnlockBits(data);
@@ -110,6 +108,7 @@ namespace PongGame.Scenes
             GL.BindTexture(TextureTarget.Texture2D, 0);
             GL.Disable(EnableCap.Texture2D);
         }
+
         public void Render(FrameEventArgs e)
         {
             GL.Viewport(0, 0, sceneManager.Width, sceneManager.Height);
@@ -128,9 +127,7 @@ namespace PongGame.Scenes
                 RenderText("4. " + playerFourName + " " + playerFourScore, 0f, 180f);
                 RenderText("5. " + playerFiveName + " " + playerFiveScore, 0f, 240f);
                 RenderText("press space bar to exit to main menu", 0f, 300f);
-               
             }
         }
-        
     }
 }

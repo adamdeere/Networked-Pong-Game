@@ -1,6 +1,6 @@
 ﻿namespace PongGame
 {
-    class Scene
+    internal class Scene
     {
         protected SceneManager sceneManager;
 

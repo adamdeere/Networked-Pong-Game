@@ -1,12 +1,11 @@
-﻿using System;
-using OpenTK;
+﻿using OpenTK;
 
 namespace PongGame
 {
-    class AIPaddle : Paddle
+    internal class AIPaddle : Paddle
     {
         public AIPaddle(int x, int y) : base(x, y)
-        {  
+        {
         }
 
         public override void Update(float dt)

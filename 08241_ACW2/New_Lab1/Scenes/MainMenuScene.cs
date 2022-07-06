@@ -1,38 +1,38 @@
-﻿using System;
-using OpenTK;
+﻿using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Collections.Generic;
 
 namespace PongGame
 {
-    class MainMenuScene : Scene, IScene
+    internal class MainMenuScene : Scene, IScene
     {
-        Bitmap textBMP;
-        int textTexture;
-        Graphics textGFX;
+        private Bitmap textBMP;
+        private int textTexture;
+        private Graphics textGFX;
         public static string serverIp;
         public static string masterIp;
         public static int portNo;
 
-        Client client; //= new Client(serverIp, portNo, masterIp);
-        MasterServer master;
-        public MainMenuScene(SceneManager sceneManager, Client inClient, MasterServer inMaster) 
+        private Client client; //= new Client(serverIp, portNo, masterIp);
+        private MasterServer master;
+
+        public MainMenuScene(SceneManager sceneManager, Client inClient, MasterServer inMaster)
             : base(sceneManager)
         {
-           serverIp = inClient.serverAddress;
-           masterIp = inClient.masterAddress;
-           portNo = inClient.port;
-           client = inClient;
-           master = inMaster;
+            serverIp = inClient.serverAddress;
+            masterIp = inClient.masterAddress;
+            portNo = inClient.port;
+            client = inClient;
+            master = inMaster;
             // Set the title of the window
             sceneManager.Title = "Pong - Main Menu";
             // Set the Render and Update delegates to the Update and Render methods of this class
             sceneManager.renderer = Render;
             sceneManager.updater = Update;
-            
+
             // Create Bitmap and OpenGL texture for rendering text
             textBMP = new Bitmap(sceneManager.Width, sceneManager.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb); // match window size
             textGFX = Graphics.FromImage(textBMP);
@@ -114,16 +114,14 @@ namespace PongGame
                 {
                     sceneManager.HostAgame();
                 }
-              
             }
             if (keyState.IsKeyDown(Key.Number4))// connect networked game
             {
                 //client.checkConnection(masterIp, portNo);
                 if (client.lineFromMaster.Contains("ok"))
                 {
-                   sceneManager.ConnectToAgame(); 
+                    sceneManager.ConnectToAgame();
                 }
-                
             }
             if (keyState.IsKeyDown(Key.Number5))
             {

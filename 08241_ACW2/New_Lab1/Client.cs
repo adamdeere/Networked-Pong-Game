@@ -1,14 +1,10 @@
 ﻿//Demonstrate Sockets
 using System;
-using System.Net.Sockets;
 using System.IO;
-using PongGame;
-using System.Net;
+using System.Net.Sockets;
 using System.Threading;
 
-
-
-class Client
+internal class Client
 {
     public StreamWriter writeToServer;
     public StreamReader readFromServer;
@@ -23,6 +19,7 @@ class Client
     public string serverAddress;
     public string masterAddress;
     public int port;
+
     public Client(string inServerAddress, int inPort, string inMasterAddress)
     {
         bool connected = false;
@@ -45,14 +42,13 @@ class Client
         //        Console.WriteLine(lineFromServer);
         //        connected = true;
         //    }
-        //    catch 
+        //    catch
         //    {
-        //        Console.WriteLine("failed to connect");   
+        //        Console.WriteLine("failed to connect");
         //    }
         //});
         //t.Start();
-        
-       
+
         Thread a = new Thread(() =>
         {
             try
@@ -63,24 +59,21 @@ class Client
                 Console.WriteLine("connected to master");
                 connected = true;
             }
-            catch 
+            catch
             {
-                Console.WriteLine("failed to connect to master"); 
+                Console.WriteLine("failed to connect to master");
             }
-           
-
         });
         a.Start();
     }
+
     public void startSever()
     {
-
     }
-
 
     /// <summary>
     /// this is a method that will ping a request to the server for the high scores
-    /// and return names and scores in the form of a string that can be choipped 
+    /// and return names and scores in the form of a string that can be choipped
     /// up and returned to the game
     /// </summary>
     public void LookUp(string server, int port)
@@ -94,25 +87,22 @@ class Client
             writeToServer = new StreamWriter(serverClientLookUp.GetStream());
             readFromServer = new StreamReader(serverClientLookUp.GetStream());
 
-           // serverClient.Connect(ipAddress, inPort);
+            // serverClient.Connect(ipAddress, inPort);
             writeToServer.WriteLine("respond");
             writeToServer.Flush();
             lineFromServer = readFromServer.ReadLine();
             serverClientLookUp.Close();
-          
         }
         catch
         {
             Console.WriteLine("Server not responding");
-
         }
-
     }
+
     /// <summary>
     /// this method will broadcast the positions to the slave
     /// </summary>
-   
-    
+
     //public void checkConnection(string master, int Port)
     //{
     //    do
@@ -124,9 +114,7 @@ class Client
 
     //    } while (lineFromMaster != "ok");
     //}
-   
 
-   
     public void slaveMoveUp(string master, int Port)
     {
         writeToServer.WriteLine("up");
@@ -139,8 +127,6 @@ class Client
         writeToServer.Flush();
     }
 
-
-
     /// <summary>
     /// once the game has updated the new high score (if any) this method will send the infomation back
     /// to the server to be updated in the dictionary, written to a text file on the other
@@ -148,7 +134,6 @@ class Client
     /// </summary>
     public void Update(int scoreOne, string nameOne, int scoreTwo, string nameTwo, int scoreThree, string nameThree, int scoreFour, string nameFour, int scoreFive, string nameFive)
     {
-
         string names = nameOne;
         string name2 = nameTwo;
         string name3 = nameThree;
@@ -162,7 +147,6 @@ class Client
         int score5 = scoreFive;
         try
         {
-
             TcpClient serverUpdate = new TcpClient();
             serverUpdate.Connect(serverAddress, port);
             StreamWriter sw = new StreamWriter(serverUpdate.GetStream());
@@ -173,13 +157,6 @@ class Client
         }
         catch
         {
-
         }
-
-
     }
 }
-
-
-
-

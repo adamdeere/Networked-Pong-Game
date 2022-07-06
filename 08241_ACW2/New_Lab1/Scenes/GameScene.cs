@@ -1,24 +1,23 @@
-﻿using System;
-using OpenTK;
+﻿using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
+using System;
 using System.Drawing;
-using System.Collections.Generic;
 
 namespace PongGame
 {
-    class GameScene : Scene, IScene
+    internal class GameScene : Scene, IScene
     {
-        Matrix4 projectionMatrix;
+        private Matrix4 projectionMatrix;
 
-        PlayerPaddle paddlePlayer;
-        AIPaddle paddleAI;
-        Ball ball;
-        int scorePlayer = 9;
-        int scoreAI = 0;
-        double gameTime = 2;
+        private PlayerPaddle paddlePlayer;
+        private AIPaddle paddleAI;
+        private Ball ball;
+        private int scorePlayer = 9;
+        private int scoreAI = 0;
+        private double gameTime = 2;
 
-        public GameScene(SceneManager sceneManager) 
+        public GameScene(SceneManager sceneManager)
             : base(sceneManager)
         {
             // Set the Render and Update delegates to the Update and Render methods of this class
@@ -49,6 +48,7 @@ namespace PongGame
                 case Key.Up:
                     paddlePlayer.Move(20);
                     break;
+
                 case Key.Down:
                     paddlePlayer.Move(-20);
                     break;
@@ -78,7 +78,6 @@ namespace PongGame
             {
                 sceneManager.HighScore(scorePlayer);
             }
-            
         }
 
         private bool GoalDetection()
@@ -128,4 +127,3 @@ namespace PongGame
         }
     }
 }
-

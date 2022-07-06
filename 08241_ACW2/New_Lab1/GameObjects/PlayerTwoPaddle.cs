@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PongGame.GameObjects
+﻿namespace PongGame.GameObjects
 {
-    class PlayerTwoPaddle : Paddle
+    internal class PlayerTwoPaddle : Paddle
     {
         public PlayerTwoPaddle(int x, int y) : base(x, y)
-        { 
+        {
         }
 
         public override void Update(float dt)
