@@ -80,6 +80,7 @@
     <Compile Include="Scenes\MultiGameScene.cs" />
     <Compile Include="Scenes\Scene.cs" />
     <Compile Include="Scenes\SlaveGameClass.cs" />
+    <Compile Include="Utils\RenderText.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

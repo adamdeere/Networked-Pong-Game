@@ -1,25 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace PongGame
 {
-    class MasterServer
+    internal class MasterServer
     {
         public StreamReader readFromSlave;
         public StreamWriter writeToSlave;
         public Socket connection;
         public NetworkStream socketStream;
         public string lineFromSlave;
+
         public MasterServer()
         {
-
             Thread a = new Thread(() =>
             {
                 TcpListener listener = new TcpListener(IPAddress.Any, 43);
@@ -29,10 +25,10 @@ namespace PongGame
                 writeToSlave = new StreamWriter(socketStream);
                 readFromSlave = new StreamReader(socketStream);
                 Console.WriteLine("listening to slave");
-
             });
             a.Start();
         }
+
         public void confirmConnection()
         {
             do
@@ -44,11 +40,8 @@ namespace PongGame
                 {
                     writeToSlave.WriteLine("ok");
                     writeToSlave.Flush();
-
                 }
-
             } while (lineFromSlave != "confirm");
-
         }
     }
 }

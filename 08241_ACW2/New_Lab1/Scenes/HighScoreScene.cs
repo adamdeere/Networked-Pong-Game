@@ -11,50 +11,50 @@ using System.Threading.Tasks;
 
 namespace PongGame.Scenes
 {
-    class HighScoreScene : Scene, IScene
+    internal class HighScoreScene : Scene, IScene
     {
-        Bitmap textBMP;
-        int textTexture;
-        Graphics textGFX;
-        static string master;
-        static string outServerAddress;
-        static int Port;
-        Client client;// = new Client(outServerAddress, Port, master);
+        private Bitmap textBMP;
+        private int textTexture;
+        private Graphics textGFX;
+        private static string master;
+        private static string outServerAddress;
+        private static int Port;
+        private Client client;// = new Client(outServerAddress, Port, master);
 
         #region
-        bool aPressed = true;
-        bool bPressed = true;
-        bool cPressed = true;
-        bool dPressed = true;
-        bool ePressed = true;
-        bool fPressed = true;
-        bool gPressed = true;
-        bool hPressed = true;
-        bool iPressed = true;
-        bool jPressed = true;
-        bool kPressed = true;
-        bool lPressed = true;
-        bool mPressed = true;
-        bool nPressed = true;
-        bool oPressed = true;
-        bool pPressed = true;
-        bool qPressed = true;
-        bool rPressed = true;
-        bool sPressed = true;
-        bool tPressed = true;
-        bool uPressed = true;
-        bool vPressed = true;
-        bool wPressed = true;
-        bool xPressed = true;
-        bool yPressed = true;
-        bool zPressed = true;
+        private bool aPressed = true;
+        private bool bPressed = true;
+        private bool cPressed = true;
+        private bool dPressed = true;
+        private bool ePressed = true;
+        private bool fPressed = true;
+        private bool gPressed = true;
+        private bool hPressed = true;
+        private bool iPressed = true;
+        private bool jPressed = true;
+        private bool kPressed = true;
+        private bool lPressed = true;
+        private bool mPressed = true;
+        private bool nPressed = true;
+        private bool oPressed = true;
+        private bool pPressed = true;
+        private bool qPressed = true;
+        private bool rPressed = true;
+        private bool sPressed = true;
+        private bool tPressed = true;
+        private bool uPressed = true;
+        private bool vPressed = true;
+        private bool wPressed = true;
+        private bool xPressed = true;
+        private bool yPressed = true;
+        private bool zPressed = true;
         #endregion
-        string name;
-        int highScore;
-        string nameAndStuff;
+        private string name;
+        private int highScore;
+        private string nameAndStuff;
 
-        int tempScore;
-        string tempName;
+        private int tempScore;
+        private string tempName;
 
         public int playerOneScore;
         public int playerTwoScore;
@@ -67,15 +67,15 @@ namespace PongGame.Scenes
         public string playerFourName;
         public string playerFiveName;
 
-        List<string> NameInput = new List<string>();
-        List<int> ScoreInput = new List<int>();
+        private List<string> NameInput = new List<string>();
+        private List<int> ScoreInput = new List<int>();
 
-        int[] scores = new int[5];
+        private int[] scores = new int[5];
 
-        string[] namesFromServer = new string[5];
+        private string[] namesFromServer = new string[5];
 
-        
-        float offset = 300f;
+        private float offset = 300f;
+
         public HighScoreScene(SceneManager sceneManager, int inScore, Client inClient)
             : base(sceneManager)
         {
@@ -118,17 +118,15 @@ namespace PongGame.Scenes
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, textBMP.Width, textBMP.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, IntPtr.Zero);
             GL.BindTexture(TextureTarget.Texture2D, 0);
             GL.Disable(EnableCap.Texture2D);
-
-
         }
 
         public void Update(FrameEventArgs e)
         {
             EnterName(new KeyboardKeyEventArgs());
         }
+
         public void EnterName(KeyboardKeyEventArgs e)
         {
-
             name = string.Join("", NameInput.ToArray());
             KeyboardState keyState = Keyboard.GetState();
             //this region ctrols the input from the keys
@@ -525,7 +523,6 @@ namespace PongGame.Scenes
                     #endregion
                 }
             }
-
         }
 
         private void RenderText(string text, float x, float y)
@@ -550,6 +547,7 @@ namespace PongGame.Scenes
             GL.BindTexture(TextureTarget.Texture2D, 0);
             GL.Disable(EnableCap.Texture2D);
         }
+
         public void Render(FrameEventArgs e)
         {
             GL.Viewport(0, 0, sceneManager.Width, sceneManager.Height);
@@ -564,6 +562,5 @@ namespace PongGame.Scenes
                 RenderText("Please enter your name", 0f, 50f);
             }
         }
-
     }
 }

@@ -1,19 +1,17 @@
-﻿
+﻿using System;
 
-using System;
 namespace PongGame
 {
     public class Start
     {
-       static int Port;
-       static string IPaddress;
-       static  string masterIp;
-      
+        private static int Port;
+        private static string IPaddress;
+        private static string masterIp;
+
         public static void Main(string[] args)
         {
-
             bool exit = false;
-            while (exit==false)
+            while (exit == false)
             {
                 try
                 {
@@ -26,15 +24,15 @@ namespace PongGame
                     Console.WriteLine("please enter a numerical value");
                 }
             }
-           
+
             Console.WriteLine("please enter the server ip address");
             IPaddress = Console.ReadLine();
             Console.WriteLine("please enter the ip address of the game you wish to connect to");
             masterIp = Console.ReadLine();
             MasterServer master = new MasterServer();
             Client client = new Client(IPaddress, Port, masterIp);
-          
-             using (SceneManager sceneManager = new SceneManager(client, master))
+
+            using (SceneManager sceneManager = new SceneManager(client, master))
             {
                 sceneManager.Run(60.0f);
             }
