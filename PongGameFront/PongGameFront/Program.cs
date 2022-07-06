@@ -3,9 +3,6 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using PongGameFront;
 
-// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello there!");
-
 var nativeWindowSettings = new NativeWindowSettings()
 {
     Size = new Vector2i(800, 600),

@@ -1,5 +1,4 @@
 ﻿using OpenTK.Mathematics;
-using System;
 
 namespace PongGameFront.Common
 {
@@ -110,4 +109,3 @@ namespace PongGameFront.Common
         }
     }
 }
-
